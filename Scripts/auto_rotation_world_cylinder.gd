@@ -24,4 +24,5 @@ func _physics_process(delta: float) -> void:
 	if current_rotation_value >= 360:
 		rotation_count += 1
 		current_rotation_value -= 360
+		speed += 5
 		rotation_done.emit()

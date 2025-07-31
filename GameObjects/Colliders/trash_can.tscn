@@ -9,7 +9,7 @@ albedo_color = Color(1.2875e-06, 0.380339, 0.192185, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_u6q7x"]
 size = Vector3(2.3103, 2.43527, 3.25079)
 
-[node name="TrashCan" type="Node3D"]
+[node name="TrashCan" type="Node3D" groups=["collider"]]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]

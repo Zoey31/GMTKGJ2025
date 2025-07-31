@@ -1,22 +1,76 @@
-[gd_scene load_steps=4 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=9 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
 [ext_resource type="Script" uid="uid://dgd5c3aiftu7p" path="res://Scripts/camera_3d.gd" id="1_jv6wh"]
 [ext_resource type="PackedScene" uid="uid://ru58h4xppqp1" path="res://GameObjects/world_cylinder.tscn" id="2_jv6wh"]
+[ext_resource type="Script" uid="uid://cqanss75rixot" path="res://Scripts/despawner.gd" id="4_iacmt"]
+[ext_resource type="Script" uid="uid://bme7gcjxnjn2y" path="res://Scripts/spawner.gd" id="4_x6ack"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jv6wh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6ack"]
+size = Vector3(2, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iacmt"]
+size = Vector3(2, 2, 2)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Player" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.9893, 0)
+mesh = SubResource("CapsuleMesh_jv6wh")
+
+[node name="Floor" type="Node3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
-[node name="Cylinder" parent="Node3D" instance=ExtResource("2_jv6wh")]
+[node name="Cylinder" parent="Floor" instance=ExtResource("2_jv6wh")]
 script = ExtResource("1_6l7je")
+speed = 30.0
+tick_interval = 30.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -12.6938, 16.596, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("cylinder")]
 transform = Transform3D(4.37114e-08, 1, 8.9407e-08, -4.37114e-08, -8.9407e-08, 1, 1, -4.37114e-08, 4.37114e-08, 0, 17.06, 0)
 script = ExtResource("1_jv6wh")
 camera_distance_per_rotate = 5.0
-cylinder = NodePath("../Node3D/Cylinder")
+cylinder = NodePath("../Floor/Cylinder")
+
+[node name="Despawner" type="Node3D" parent="."]
+script = ExtResource("4_iacmt")
+
+[node name="Area3D" type="Area3D" parent="Despawner"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Despawner/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.251, 0, 0)
+shape = SubResource("BoxShape3D_x6ack")
+
+[node name="Spawner" type="Node3D" parent="." node_paths=PackedStringArray("positions", "cylinder")]
+script = ExtResource("4_x6ack")
+positions = [NodePath("PositionToSpawn1/CollisionShape3D"), NodePath("PositionToSpawn2/CollisionShape3D"), NodePath("PositionToSpawn3/CollisionShape3D")]
+cylinder = NodePath("../Floor/Cylinder")
+chance_for_pickup = 100
+chance_for_walls = 100
+
+[node name="PositionToSpawn1" type="Area3D" parent="Spawner"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spawner/PositionToSpawn1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.177, 0, -4)
+shape = SubResource("BoxShape3D_iacmt")
+
+[node name="PositionToSpawn2" type="Area3D" parent="Spawner"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spawner/PositionToSpawn2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1773, 0, 0)
+shape = SubResource("BoxShape3D_iacmt")
+
+[node name="PositionToSpawn3" type="Area3D" parent="Spawner"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spawner/PositionToSpawn3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.177, 0, 4)
+shape = SubResource("BoxShape3D_iacmt")

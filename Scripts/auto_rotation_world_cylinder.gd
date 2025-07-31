@@ -10,16 +10,16 @@ var current_rotation_value: float = 0
 var current_tick_value: float = 0
 
 signal rotation_done()
-signal rotation_tick()
+signal rotation_tick(current_rotation_value)
 
 func _physics_process(delta: float) -> void:
 	rotation_degrees.z += delta * speed
 	current_rotation_value += delta * speed
 	current_tick_value += delta * speed
-	
+
 	if current_tick_value > tick_interval:
-		current_tick_value -= 5
-		rotation_tick.emit()
+		current_tick_value -= tick_interval
+		rotation_tick.emit(current_rotation_value)
 	
 	if current_rotation_value >= 360:
 		rotation_count += 1

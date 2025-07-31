@@ -1,17 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=4 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
-[ext_resource type="PackedScene" uid="uid://ljm0hbkjgiy3" path="res://Main.blend" id="2_jv6wh"]
+[ext_resource type="Script" uid="uid://dgd5c3aiftu7p" path="res://Scripts/camera_3d.gd" id="1_jv6wh"]
+[ext_resource type="PackedScene" uid="uid://ru58h4xppqp1" path="res://GameObjects/world_cylinder.tscn" id="2_jv6wh"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(4.37114e-08, 1, 8.9407e-08, -4.37114e-08, -8.9407e-08, 1, 1, -4.37114e-08, 4.37114e-08, 0.470414, 17.0603, -8.52652e-13)
-
-[node name="Main" parent="." instance=ExtResource("2_jv6wh")]
+[node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="Cylinder" parent="Node3D" instance=ExtResource("2_jv6wh")]
 script = ExtResource("1_6l7je")
-speed = 5.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -12.6938, 16.596, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("cylinder")]
+transform = Transform3D(4.37114e-08, 1, 8.9407e-08, -4.37114e-08, -8.9407e-08, 1, 1, -4.37114e-08, 4.37114e-08, 0, 17.06, 0)
+script = ExtResource("1_jv6wh")
+camera_distance_per_rotate = 5.0
+cylinder = NodePath("../Node3D/Cylinder")

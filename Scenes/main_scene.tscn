@@ -1,8 +1,17 @@
-[gd_scene format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=3 format=3 uid="uid://ojhmrwyohm2l"]
+
+[ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
+[ext_resource type="PackedScene" uid="uid://ljm0hbkjgiy3" path="res://Main.blend" id="2_jv6wh"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-height = 1.0
-sides = 36
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(4.37114e-08, 1, 8.9407e-08, -4.37114e-08, -8.9407e-08, 1, 1, -4.37114e-08, 4.37114e-08, 0.470414, 17.0603, -8.52652e-13)
+
+[node name="Main" parent="." instance=ExtResource("2_jv6wh")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+script = ExtResource("1_6l7je")
+speed = 5.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -12.6938, 16.596, 0)

@@ -38,7 +38,6 @@ func generate_colliders(current_rotation_value, selected_position):
 	element.rotation_degrees.z -= current_rotation_value
 
 func generate(current_rotation_value):
-	var slots = [0, 0, 0]
 	var pattern = 0
 	#0 - 000
 	#1 - 001

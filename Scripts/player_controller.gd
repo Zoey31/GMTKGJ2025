@@ -42,5 +42,5 @@ func _process(delta):
 		position.z = right_restriction
 		velocity = Vector3(0, 0, 0)
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()

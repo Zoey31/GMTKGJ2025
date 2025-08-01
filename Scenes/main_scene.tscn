@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=17 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://riojkvpxy7dt" path="res://Scripts/player_controller.gd" id="1_6ev3c"]
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bme7gcjxnjn2y" path="res://Scripts/spawner.gd" id="4_x6ack"]
 [ext_resource type="Script" uid="uid://bcojl6o8bdktw" path="res://Scripts/score_handler.gd" id="7_huasi"]
 [ext_resource type="Script" uid="uid://r4wan0a86hsa" path="res://Scripts/clock_handler.gd" id="8_m1efj"]
+[ext_resource type="Script" uid="uid://dosd3tpfamerp" path="res://Scripts/end_game_window.gd" id="9_m1efj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jv6wh"]
 
@@ -180,3 +181,131 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 mouse_filter = 1
+
+[node name="UserInterface2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="EndGameWindow" type="Control" parent="UserInterface2" node_paths=PackedStringArray("player")]
+visible = false
+layout_mode = 1
+anchor_left = 0.4
+anchor_top = 0.334
+anchor_right = 0.599
+anchor_bottom = 0.665
+offset_left = -768.0
+offset_top = -360.72
+offset_right = 769.92
+offset_bottom = 361.8
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_m1efj")
+player = NodePath("../../Player")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface2/EndGameWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.334
+anchor_right = 0.599
+anchor_bottom = 0.665
+offset_left = -768.0
+offset_top = -360.72
+offset_right = 769.92
+offset_bottom = 361.8
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Space" type="Control" parent="UserInterface2/EndGameWindow/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface2/EndGameWindow/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Control" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="ColorRect" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.659706, 0.567229, 3.85046e-07, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GameOver" type="RichTextLabel" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 45
+text = "Game over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="RichTextLabel" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/normal_font_size = 20
+text = "You have managed to collect:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="RichTextLabel" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/normal_font_size = 30
+text = "1000 points"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message2" type="RichTextLabel" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/normal_font_size = 20
+text = "Good job!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Restart" type="Button" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Try again"
+
+[node name="EndGame" type="Button" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Close game"
+
+[node name="Space2" type="Control" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Space2" type="Control" parent="UserInterface2/EndGameWindow/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0

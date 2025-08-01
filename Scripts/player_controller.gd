@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 class_name PlayerController
 
 @export var left_restriction: float = -5.0
@@ -25,14 +25,22 @@ func handle_collision(area: Area3D):
 		hit_and_die.emit()
 
 func _process(delta):
-
+	var vel: Vector3 = Vector3(0, 0, 0)
 	if Input.is_action_pressed("left"):
-		position.z -= delta * speed
-		if position.z < left_restriction:
-			position.z = left_restriction
+		vel.z -= delta * speed
+		
 			
 	if Input.is_action_pressed("right"):
-		position.z += delta * speed
-		if position.z > right_restriction:
-			position.z = right_restriction
-		
+		vel.z += delta * speed
+	
+	velocity = vel * speed
+	
+	if position.z < left_restriction:
+		position.z = left_restriction
+		velocity = Vector3(0, 0, 0)
+	if position.z > right_restriction:
+		position.z = right_restriction
+		velocity = Vector3(0, 0, 0)
+	
+func _physics_process(delta):
+	move_and_slide()

@@ -1,4 +1,5 @@
 extends Node3D
+class_name PlayerController
 
 @export var left_restriction: float = -5.0
 @export var right_restriction: float = 5.0
@@ -6,17 +7,20 @@ extends Node3D
 
 @export var speed: float = 30
 
-signal pickup_item()
+signal pickup_item(pickup: PickupStats)
 signal hit_and_die()
 
 func _ready():
 	$Area3D.connect("area_entered", handle_collision)
 
 func handle_collision(area: Area3D):
-	if area.get_parent().is_in_group("pickup"):
-		area.get_parent().get_parent().remove_child(area.get_parent())
-		pickup_item.emit()
-	if area.get_parent().is_in_group("collider"):
+	var hit_element = area.get_parent()
+	if hit_element.is_in_group("pickup"):
+		if hit_element is PickupStats:
+			pickup_item.emit(hit_element)
+		hit_element.get_parent().remove_child(hit_element)
+		
+	if hit_element.is_in_group("collider"):
 		visible = false
 		hit_and_die.emit()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=16 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://riojkvpxy7dt" path="res://Scripts/player_controller.gd" id="1_6ev3c"]
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ru58h4xppqp1" path="res://GameObjects/world_cylinder.tscn" id="2_jv6wh"]
 [ext_resource type="Script" uid="uid://cqanss75rixot" path="res://Scripts/despawner.gd" id="4_iacmt"]
 [ext_resource type="Script" uid="uid://bme7gcjxnjn2y" path="res://Scripts/spawner.gd" id="4_x6ack"]
+[ext_resource type="Script" uid="uid://bcojl6o8bdktw" path="res://Scripts/score_handler.gd" id="7_huasi"]
+[ext_resource type="Script" uid="uid://r4wan0a86hsa" path="res://Scripts/clock_handler.gd" id="8_m1efj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jv6wh"]
 
@@ -16,6 +18,17 @@ size = Vector3(2, 1, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iacmt"]
 size = Vector3(2, 2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mai8y"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_76v2p"]
+interpolation_mode = 1
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_drdnd"]
+gradient = SubResource("Gradient_76v2p")
+width = 5
 
 [node name="Node3D" type="Node3D"]
 
@@ -37,10 +50,11 @@ shape = SubResource("CapsuleShape3D_6ev3c")
 [node name="Floor" type="Node3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
-[node name="Cylinder" parent="Floor" instance=ExtResource("2_jv6wh")]
+[node name="Cylinder" parent="Floor" node_paths=PackedStringArray("player") instance=ExtResource("2_jv6wh")]
 script = ExtResource("1_6l7je")
 speed = 10.0
 tick_interval = 30.0
+player = NodePath("../../Player")
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -90,3 +104,79 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.11339, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spawner/PositionToSpawn3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.177, 0, 4)
 shape = SubResource("BoxShape3D_iacmt")
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Score" type="PanelContainer" parent="UserInterface" node_paths=PackedStringArray("player")]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 84.0
+mouse_filter = 2
+script = ExtResource("7_huasi")
+player = NodePath("../../Player")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UserInterface/Score"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "9999999"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClockHandler" type="HBoxContainer" parent="UserInterface" node_paths=PackedStringArray("world")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -996.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_m1efj")
+world = NodePath("../../Floor/Cylinder")
+
+[node name="LeftSpace" type="Control" parent="UserInterface/ClockHandler"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 1
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="UserInterface/ClockHandler"]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="Clock" type="Panel" parent="UserInterface/ClockHandler/AspectRatioContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_mai8y")
+
+[node name="TextureRect" type="TextureRect" parent="UserInterface/ClockHandler/AspectRatioContainer/Clock"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.5
+offset_top = 42.0
+offset_right = -0.5
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_drdnd")
+
+[node name="RightSpace" type="Control" parent="UserInterface/ClockHandler"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 1

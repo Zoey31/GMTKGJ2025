@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=30 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://riojkvpxy7dt" path="res://Scripts/player_controller.gd" id="1_6ev3c"]
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://ru58h4xppqp1" path="res://GameObjects/world_cylinder.tscn" id="2_jv6wh"]
 [ext_resource type="Script" uid="uid://cqanss75rixot" path="res://Scripts/despawner.gd" id="4_iacmt"]
 [ext_resource type="Script" uid="uid://bme7gcjxnjn2y" path="res://Scripts/spawner.gd" id="4_x6ack"]
+[ext_resource type="PackedScene" uid="uid://b2204w2c03kda" path="res://GameObjects/Colliders/car.tscn" id="5_drdnd"]
+[ext_resource type="PackedScene" uid="uid://bhqsadavsh6v7" path="res://GameObjects/Colliders/barrier.tscn" id="6_ioaeq"]
+[ext_resource type="PackedScene" uid="uid://bvv8kkkkhrxqj" path="res://GameObjects/Colliders/trash_can.tscn" id="7_7ewk0"]
 [ext_resource type="Script" uid="uid://bcojl6o8bdktw" path="res://Scripts/score_handler.gd" id="7_huasi"]
 [ext_resource type="Script" uid="uid://r4wan0a86hsa" path="res://Scripts/clock_handler.gd" id="8_m1efj"]
 [ext_resource type="Script" uid="uid://dosd3tpfamerp" path="res://Scripts/end_game_window.gd" id="9_m1efj"]
@@ -196,6 +199,41 @@ speed = 16.0
 tick_interval = 30.0
 player = NodePath("../../Player")
 
+[node name="Obstacles" type="Node3D" parent="Floor/Cylinder"]
+
+[node name="Car" parent="Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7216, 0, 0)
+
+[node name="Car2" parent="Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
+transform = Transform3D(0.981527, 0.191323, 0, -0.191323, 0.981527, 0, 0, 0, 1, 1.69185, -0.395071, 0)
+
+[node name="Car3" parent="Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
+transform = Transform3D(0.599736, 0.741936, 0.299746, -0.800198, 0.55607, 0.224655, -1.49012e-08, -0.37459, 0.92719, 1.00298, -1.41184, 0.303514)
+
+[node name="Car4" parent="Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
+transform = Transform3D(-0.798468, 0.428211, 0.423185, -0.60071, -0.613346, -0.512792, 0.0399761, -0.663659, 0.746967, -1.53768, -0.781998, -0.295347)
+
+[node name="Car5" parent="Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
+transform = Transform3D(-0.843964, 0.418127, -0.335998, -0.536049, -0.680088, 0.500131, -0.0193896, 0.602204, 0.798107, -1.55861, -0.769011, 0.281817)
+
+[node name="Barrier" parent="Floor/Cylinder/Obstacles" instance=ExtResource("6_ioaeq")]
+transform = Transform3D(0.891315, 0.453062, -0.017099, 0.45255, -0.891329, -0.0270494, -0.0274959, 0.0163713, -0.999488, 1.50715, 0.826526, -0.292738)
+
+[node name="Barrier2" parent="Floor/Cylinder/Obstacles" instance=ExtResource("6_ioaeq")]
+transform = Transform3D(0.404286, -0.914076, -0.0319032, 0.914114, 0.404986, -0.0195708, 0.0308095, -0.0212509, 0.9993, 0.555301, 1.60376, 0.370122)
+
+[node name="TrashCan" parent="Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
+transform = Transform3D(-0.0394252, -0.0898158, 0.0194623, -0.0918845, 0.0381328, -0.0101548, 0.00169906, -0.0218864, -0.0975607, -0.806203, -1.5101, -0.1834)
+
+[node name="TrashCan2" parent="Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
+transform = Transform3D(0.0709347, -0.0661477, -0.0243464, -0.0688991, -0.0577823, -0.0437506, 0.0148721, 0.0478089, -0.0865629, 1.25725, -1.18496, 0.189406)
+
+[node name="TrashCan3" parent="Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
+transform = Transform3D(-0.0685876, -0.0727267, 0.00256346, 0.0725788, -0.0681068, 0.00968431, -0.00529717, 0.00850274, 0.099497, -1.08093, 1.3771, 0.367427)
+
+[node name="TrashCan4" parent="Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
+transform = Transform3D(-0.0605466, 0.00126531, -0.0795771, 0.0793891, -0.00608861, -0.0605004, -0.00561069, -0.0998065, 0.00268196, -0.871422, 1.51636, 0.282209)
+
 [node name="Area3D" type="Area3D" parent="Floor"]
 disable_mode = 1
 
@@ -288,8 +326,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -198.0
-offset_bottom = -798.0
+offset_bottom = -600.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(960, -10)

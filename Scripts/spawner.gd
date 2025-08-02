@@ -3,7 +3,7 @@ extends Node3D
 @export var positions: Array[CollisionShape3D] = []
 @export var cylinder: AutoRotationWorldCylinder = null
 @export_category("Generate chances")
-@export var chance_for_pickup = 30
+@export var chance_for_pickup = 66
 @export var chance_for_walls = 60
 
 

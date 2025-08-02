@@ -40,9 +40,9 @@ func _physics_process(delta: float) -> void:
 		current_tick_value -= tick_interval
 		rotation_tick.emit(current_rotation_value)
 	
-	if current_rotation_value >= 180:
+	if current_rotation_value >= 360:
 		rotation_count += 1
-		current_rotation_value -= 180
+		current_rotation_value -= 360
 		speed += speed_increase
 		rotation_done.emit()
 

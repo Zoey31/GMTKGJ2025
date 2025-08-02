@@ -329,7 +329,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -600.0
+offset_bottom = -998.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(960, -10)
@@ -344,11 +344,12 @@ mouse_filter = 1
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="UserInterface/ClockHandler"]
 layout_mode = 2
+size_flags_horizontal = 3
 stretch_mode = 1
+alignment_vertical = 0
 
 [node name="Clock" type="Panel" parent="UserInterface/ClockHandler/AspectRatioContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_mai8y")
 
@@ -357,10 +358,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 41.5
-offset_top = 42.0
-offset_right = -0.5
-offset_bottom = -40.0
+offset_left = 40.5
+offset_top = 41.5
+offset_right = -1.5
+offset_bottom = -39.5
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.5708
@@ -386,7 +387,7 @@ offset_right = 170.0
 offset_bottom = 188.0
 script = ExtResource("9_mai8y")
 player = NodePath("../../Player")
-life_orbs = [NodePath(""), NodePath(""), NodePath("")]
+life_orbs = [NodePath("MarginContainer/HBoxContainer/1"), NodePath("MarginContainer/HBoxContainer/2"), NodePath("MarginContainer/HBoxContainer/3")]
 
 [node name="MarginContainer" type="MarginContainer" parent="UserInterface/Life"]
 layout_mode = 1

@@ -10,5 +10,8 @@ func _ready():
 		
 func remove_life():
 	if life_orbs:
-		life_orbs[-1].modulate.a = 0
+		if life_orbs[-1]:
+			life_orbs[-1].modulate.a = 0
+		else:
+			print("TOMKE RATUJ! JAK UZUPELNIASZ LIFE_ORBS?!")
 		life_orbs.pop_back()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=32 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://riojkvpxy7dt" path="res://Scripts/player_controller.gd" id="1_6ev3c"]
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
@@ -13,7 +13,9 @@
 [ext_resource type="Script" uid="uid://bcojl6o8bdktw" path="res://Scripts/score_handler.gd" id="7_huasi"]
 [ext_resource type="Script" uid="uid://r4wan0a86hsa" path="res://Scripts/clock_handler.gd" id="8_m1efj"]
 [ext_resource type="Script" uid="uid://dosd3tpfamerp" path="res://Scripts/end_game_window.gd" id="9_m1efj"]
-[ext_resource type="Script" path="res://Scripts/player_life.gd" id="9_mai8y"]
+[ext_resource type="Script" uid="uid://6vwj5fxn63ew" path="res://Scripts/player_life.gd" id="9_mai8y"]
+[ext_resource type="FontFile" uid="uid://c2ywq3qs7jx6p" path="res://Fonts/Pixellari.ttf" id="12_lhp3t"]
+[ext_resource type="Texture2D" uid="uid://e13mih8xlwgq" path="res://Sprites/full_hp.png" id="15_gnsmo"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jv6wh"]
 
@@ -314,6 +316,7 @@ player = NodePath("../../Player")
 layout_mode = 2
 offset_right = 170.0
 offset_bottom = 84.0
+theme_override_fonts/normal_font = ExtResource("12_lhp3t")
 theme_override_font_sizes/normal_font_size = 30
 text = "9999999"
 fit_content = true
@@ -383,7 +386,7 @@ offset_right = 170.0
 offset_bottom = 188.0
 script = ExtResource("9_mai8y")
 player = NodePath("../../Player")
-life_orbs = [NodePath("MarginContainer/HBoxContainer/1"), NodePath("MarginContainer/HBoxContainer/2"), NodePath("MarginContainer/HBoxContainer/3")]
+life_orbs = [NodePath(""), NodePath(""), NodePath("")]
 
 [node name="MarginContainer" type="MarginContainer" parent="UserInterface/Life"]
 layout_mode = 1
@@ -400,20 +403,23 @@ theme_override_constants/margin_bottom = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/Life/MarginContainer"]
 layout_mode = 2
 
-[node name="1" type="ColorRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
+[node name="1" type="TextureRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(1, 0, 0, 1)
+texture = ExtResource("15_gnsmo")
+expand_mode = 3
 
-[node name="2" type="ColorRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
+[node name="2" type="TextureRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(1, 0, 0, 1)
+texture = ExtResource("15_gnsmo")
+expand_mode = 4
 
-[node name="3" type="ColorRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
+[node name="3" type="TextureRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(1, 0, 0, 1)
+texture = ExtResource("15_gnsmo")
+expand_mode = 4
 
 [node name="UserInterface2" type="Control" parent="."]
 layout_mode = 3
@@ -486,6 +492,7 @@ anchor_bottom = 1.0
 [node name="GameOver" type="RichTextLabel" parent="UserInterface2/EndGameWindow/HBoxContainer/VBoxContainer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("12_lhp3t")
 theme_override_font_sizes/normal_font_size = 45
 text = "Game over!"
 horizontal_alignment = 1
@@ -495,6 +502,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+theme_override_fonts/normal_font = ExtResource("12_lhp3t")
 theme_override_font_sizes/normal_font_size = 20
 text = "You have managed to collect:"
 horizontal_alignment = 1
@@ -504,6 +512,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+theme_override_fonts/normal_font = ExtResource("12_lhp3t")
 theme_override_font_sizes/normal_font_size = 30
 text = "1000 points"
 horizontal_alignment = 1
@@ -513,6 +522,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+theme_override_fonts/normal_font = ExtResource("12_lhp3t")
 theme_override_font_sizes/normal_font_size = 20
 text = "Good job!"
 horizontal_alignment = 1

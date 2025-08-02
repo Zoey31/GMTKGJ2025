@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=25 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://riojkvpxy7dt" path="res://Scripts/player_controller.gd" id="1_6ev3c"]
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
@@ -9,10 +9,50 @@
 [ext_resource type="Script" uid="uid://bcojl6o8bdktw" path="res://Scripts/score_handler.gd" id="7_huasi"]
 [ext_resource type="Script" uid="uid://r4wan0a86hsa" path="res://Scripts/clock_handler.gd" id="8_m1efj"]
 [ext_resource type="Script" uid="uid://dosd3tpfamerp" path="res://Scripts/end_game_window.gd" id="9_m1efj"]
+[ext_resource type="Script" uid="uid://6vwj5fxn63ew" path="res://Scripts/player_life.gd" id="9_mai8y"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jv6wh"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mai8y"]
+transparency = 1
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6ev3c"]
+
+[sub_resource type="Animation" id="Animation_76v2p"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGMesh3D:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 0.392157), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_drdnd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGMesh3D:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ioaeq"]
+_data = {
+&"RESET": SubResource("Animation_drdnd"),
+&"hit": SubResource("Animation_76v2p")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x6ack"]
 size = Vector3(2, 1, 20)
@@ -92,10 +132,10 @@ tracks/1/path = NodePath("../..:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.3, 0.466667, 0.633333, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0523599, -0.0523599, 0.0]
+"values": [0.0, 0.10472, -0.10472, 0.10472, -0.10472, 0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -104,10 +144,10 @@ tracks/2/path = NodePath("../..:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.75),
+"times": PackedFloat32Array(0, 0.365, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(3, 3), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76v2p"]
@@ -126,12 +166,18 @@ camera = NodePath("../Camera3D")
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.9679, 0)
 mesh = SubResource("CapsuleMesh_jv6wh")
+material = SubResource("StandardMaterial3D_mai8y")
 
 [node name="Area3D" type="Area3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.968, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Area3D"]
 shape = SubResource("CapsuleShape3D_6ev3c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_ioaeq")
+}
 
 [node name="Floor" type="Node3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
@@ -274,6 +320,46 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 mouse_filter = 1
+
+[node name="Life" type="Panel" parent="UserInterface" node_paths=PackedStringArray("player", "life_orbs")]
+layout_mode = 1
+anchors_preset = -1
+offset_top = 104.0
+offset_right = 170.0
+offset_bottom = 188.0
+script = ExtResource("9_mai8y")
+player = NodePath("../../Player")
+life_orbs = [NodePath("MarginContainer/HBoxContainer/1"), NodePath("MarginContainer/HBoxContainer/2"), NodePath("MarginContainer/HBoxContainer/3")]
+
+[node name="MarginContainer" type="MarginContainer" parent="UserInterface/Life"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/Life/MarginContainer"]
+layout_mode = 2
+
+[node name="1" type="ColorRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 0, 0, 1)
+
+[node name="2" type="ColorRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 0, 0, 1)
+
+[node name="3" type="ColorRect" parent="UserInterface/Life/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 0, 0, 1)
 
 [node name="UserInterface2" type="Control" parent="."]
 layout_mode = 3

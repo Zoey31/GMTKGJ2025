@@ -7,8 +7,11 @@ class_name PlayerController
 
 @export var speed: float = 30
 
+var life = 3
+
 signal pickup_item(pickup: PickupStats)
 signal hit_and_die()
+signal hit()
 
 func _ready():
 	$Area3D.connect("area_entered", handle_collision)
@@ -21,8 +24,13 @@ func handle_collision(area: Area3D):
 		hit_element.get_parent().remove_child(hit_element)
 		
 	if hit_element.is_in_group("collider"):
-		visible = false
-		hit_and_die.emit()
+		life -= 1
+		$AnimationPlayer.play("hit", -1, 2.0)
+		if life < 1:
+			visible = false
+			hit_and_die.emit()
+		else:
+			hit.emit()
 
 func _process(delta):
 	var vel: Vector3 = Vector3(0, 0, 0)

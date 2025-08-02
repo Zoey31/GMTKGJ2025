@@ -184,7 +184,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="Cylinder" parent="Floor" node_paths=PackedStringArray("player") instance=ExtResource("2_jv6wh")]
 script = ExtResource("1_6l7je")
-speed = 10.0
+speed = 16.0
 tick_interval = 30.0
 player = NodePath("../../Player")
 

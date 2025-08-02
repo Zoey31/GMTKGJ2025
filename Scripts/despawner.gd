@@ -5,4 +5,5 @@ func _ready():
 	
 func despawn(area: Area3D):
 	var item = area.get_parent()
-	item.get_parent().remove_child(item)
+	if item.is_in_group("pickup"):
+		item.get_parent().remove_child(item)

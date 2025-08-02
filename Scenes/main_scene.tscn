@@ -215,6 +215,7 @@ script = ExtResource("4_x6ack")
 positions = [NodePath("PositionToSpawn1/CollisionShape3D"), NodePath("PositionToSpawn2/CollisionShape3D"), NodePath("PositionToSpawn3/CollisionShape3D")]
 cylinder = NodePath("../Floor/Cylinder")
 chance_for_pickup = 35
+chance_for_walls = 0
 
 [node name="PositionToSpawn1" type="Area3D" parent="Spawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.11339, 0, 0)

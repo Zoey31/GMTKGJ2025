@@ -1,6 +1,10 @@
 extends CharacterBody3D
 class_name PlayerController
 
+var pickup_sound = preload("res://Sounds/Pickup_346404__robinhood76__06698-gem-collect-ding.wav")
+var hit_sound = preload("res://Sounds/Damaged_406527__anthousai__hit-metallic-trailer-back-of-metal-trailer-02.wav")
+var died_sound = preload("res://Sounds/Died_277195__coral_island_studios__dog-begging.wav")
+
 @export var left_restriction: float = -5.0
 @export var right_restriction: float = 5.0
 @export var camera: Camera3D
@@ -50,13 +54,21 @@ func handle_collision(area: Area3D):
 	if hit_element.is_in_group("pickup"):
 		if hit_element is PickupStats:
 			pickup_item.emit(hit_element)
+			$AudioStreamPlayer3D.stream = pickup_sound
+			$AudioStreamPlayer3D.play()
+			
 		hit_element.get_parent().remove_child(hit_element)
 		
 	if hit_element.is_in_group("collider"):
 		life -= 1
+		if !$AudioStreamPlayer3D.is_playing():
+			$AudioStreamPlayer3D.stream = hit_sound
+			$AudioStreamPlayer3D.play()
 		if life < 1:
 			$AnimationPlayer.play("die")
 			hit_and_die.emit()
+			$AudioStreamPlayer3D.stream = died_sound
+			$AudioStreamPlayer3D.play()
 			$AnimationPlayer.animation_finished.connect(
 				display_score_screen
 			)

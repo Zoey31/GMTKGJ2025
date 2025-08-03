@@ -64,21 +64,6 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_76v2p"]
-resource_name = "hit"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Rat:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(3, 3, 3), Vector3(4, 4, 4), Vector3(3, 3, 3)]
-}
-
 [sub_resource type="Animation" id="Animation_gnsmo"]
 resource_name = "die"
 tracks/0/type = "value"
@@ -104,6 +89,21 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-3.14159, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_76v2p"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rat:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3, 3, 3), Vector3(4, 4, 4), Vector3(3, 3, 3)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ioaeq"]
@@ -246,6 +246,8 @@ shape = SubResource("CapsuleShape3D_6ev3c")
 libraries = {
 &"": SubResource("AnimationLibrary_ioaeq")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Player"]
 
 [node name="Floor" type="Node3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
@@ -413,6 +415,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="UserInterface/ClockHandler/AspectRatioContainer/Clock"]
 z_index = 1

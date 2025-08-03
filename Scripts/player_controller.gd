@@ -5,6 +5,8 @@ var pickup_sound = preload("res://Sounds/Pickup_346404__robinhood76__06698-gem-c
 var hit_sound = preload("res://Sounds/Damaged_406527__anthousai__hit-metallic-trailer-back-of-metal-trailer-02.wav")
 var died_sound = preload("res://Sounds/Died_277195__coral_island_studios__dog-begging.wav")
 
+@onready var animation_tree = $Rat/Rat_Body/AnimationTree
+
 @export var left_restriction: float = -5.0
 @export var right_restriction: float = 5.0
 @export var camera: Camera3D
@@ -85,10 +87,16 @@ func _process(delta):
 		return
 	if Input.is_action_pressed("left"):
 		vel.z = max(vel.z - acceleration, -speed)
+		animation_tree["parameters/Dir_Blend/blend_amount"] = 1.0
+		animation_tree["parameters/Right_Blend/blend_amount"] = max(2 * vel.z, -speed) / (-speed)
 	elif Input.is_action_pressed("right"):
 		vel.z = min(vel.z + acceleration, speed)
+		animation_tree["parameters/Dir_Blend/blend_amount"] = 0.0
+		animation_tree["parameters/Left_Blend/blend_amount"] = min(2 * vel.z, speed) / speed
 	else:
-		vel.z = lerp(vel.z, 0.0, 0.2) 
+		vel.z = lerp(vel.z, 0.0, 0.2)
+		animation_tree["parameters/Right_Blend/blend_amount"] = 0.0
+		animation_tree["parameters/Left_Blend/blend_amount"] = 0.0
 	
 	velocity = vel
 	

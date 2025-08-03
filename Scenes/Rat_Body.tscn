@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://ysmmgxy5276e"]
+
+[ext_resource type="PackedScene" uid="uid://dolouyqox6f5k" path="res://Meshes/Rat_Body.glb" id="1_ffrhi"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ffrhi"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ffrhi"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rnv1u"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0c6w3"]
+animation = &"Tail_Left"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_rnv1u"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hp5op"]
+animation = &"Tail_Right"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0c6w3"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2sfjn"]
+graph_offset = Vector2(-446.365, 18.7613)
+nodes/Dir_Blend/node = SubResource("AnimationNodeBlend2_ffrhi")
+nodes/Dir_Blend/position = Vector2(340, 220)
+nodes/IdleL/node = SubResource("AnimationNodeAnimation_ffrhi")
+nodes/IdleL/position = Vector2(-220, -20)
+nodes/IdleR/node = SubResource("AnimationNodeAnimation_rnv1u")
+nodes/IdleR/position = Vector2(-220, 400)
+nodes/Left/node = SubResource("AnimationNodeAnimation_0c6w3")
+nodes/Left/position = Vector2(-220, 160)
+nodes/Left_Blend/node = SubResource("AnimationNodeBlend2_rnv1u")
+nodes/Left_Blend/position = Vector2(100, 60)
+nodes/Right/node = SubResource("AnimationNodeAnimation_hp5op")
+nodes/Right/position = Vector2(-220, 600)
+nodes/Right_Blend/node = SubResource("AnimationNodeBlend2_0c6w3")
+nodes/Right_Blend/position = Vector2(100, 440)
+nodes/output/position = Vector2(580, 260)
+node_connections = [&"Dir_Blend", 0, &"Left_Blend", &"Dir_Blend", 1, &"Right_Blend", &"Left_Blend", 0, &"IdleL", &"Left_Blend", 1, &"Left", &"Right_Blend", 0, &"IdleR", &"Right_Blend", 1, &"Right", &"output", 0, &"Dir_Blend"]
+
+[node name="Rat_Body2" instance=ExtResource("1_ffrhi")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/2/rotation = Quaternion(1.33592e-07, -1.41083e-08, 0.00223492, 0.999997)
+bones/3/rotation = Quaternion(1.41655e-14, 2.13163e-14, 2.32873e-10, 1)
+bones/4/rotation = Quaternion(-2.96191e-21, -7.10543e-15, -1.79022e-15, 1)
+bones/5/rotation = Quaternion(-2.5411e-21, 7.10543e-15, -1.77635e-15, 1)
+bones/6/rotation = Quaternion(-2.5411e-21, 7.10543e-15, -1.77635e-15, 1)
+bones/7/rotation = Quaternion(-2.5411e-21, 7.10543e-15, -1.77635e-15, 1)
+bones/8/rotation = Quaternion(-2.5411e-21, 7.10543e-15, -1.77635e-15, 1)
+bones/9/rotation = Quaternion(-2.5411e-21, 7.10543e-15, -1.77635e-15, 1)
+bones/10/rotation = Quaternion(-2.5411e-21, 7.10543e-15, -1.77635e-15, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_2sfjn")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Dir_Blend/blend_amount = 0
+parameters/Left_Blend/blend_amount = 0
+parameters/Right_Blend/blend_amount = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=36 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://riojkvpxy7dt" path="res://Scripts/player_controller.gd" id="1_6ev3c"]
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cqanss75rixot" path="res://Scripts/despawner.gd" id="4_iacmt"]
 [ext_resource type="Script" uid="uid://bme7gcjxnjn2y" path="res://Scripts/spawner.gd" id="4_x6ack"]
 [ext_resource type="PackedScene" uid="uid://b2204w2c03kda" path="res://GameObjects/Colliders/car.tscn" id="5_drdnd"]
+[ext_resource type="PackedScene" uid="uid://d15dqyi8vnjf0" path="res://GameObjects/Colliders/car_blue.tscn" id="5_oyb3p"]
 [ext_resource type="PackedScene" uid="uid://bhqsadavsh6v7" path="res://GameObjects/Colliders/barrier.tscn" id="6_ioaeq"]
 [ext_resource type="PackedScene" uid="uid://bvv8kkkkhrxqj" path="res://GameObjects/Colliders/trash_can.tscn" id="7_7ewk0"]
 [ext_resource type="Script" uid="uid://bcojl6o8bdktw" path="res://Scripts/score_handler.gd" id="7_huasi"]
@@ -233,9 +234,11 @@ stretch = true
 stretch_shrink = 4
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
 size = Vector2i(480, 270)
+render_target_update_mode = 4
 
 [node name="Player" type="CharacterBody3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("camera", "world")]
 motion_mode = 1
@@ -278,17 +281,20 @@ player = NodePath("../../Player")
 
 [node name="Obstacles" type="Node3D" parent="SubViewportContainer/SubViewport/Floor/Cylinder"]
 
-[node name="Car" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7216, 0, 0)
+[node name="Car_Blue" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_oyb3p")]
+transform = Transform3D(0.614464, -0.382719, 0.689899, -0.787234, -0.35501, 0.504214, 0.0519494, -0.852933, -0.51943, 1.17822, -1.21311, 0.278762)
+
+[node name="Car_Blue3" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_oyb3p")]
+transform = Transform3D(0.226577, -0.280768, 0.932648, -0.973971, -0.071852, 0.214985, 0.00665163, -0.957082, -0.28974, 0.3775, -1.65976, -0.550804)
+
+[node name="Car_Blue2" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_oyb3p")]
+transform = Transform3D(-0.0399873, -0.686501, 0.726028, -0.998433, -0.00101645, -0.0559516, 0.0391487, -0.727128, -0.685385, -0.0129537, -1.68356, -0.0117137)
 
 [node name="Car2" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
-transform = Transform3D(0.981527, 0.191323, 0, -0.191323, 0.981527, 0, 0, 0, 1, 1.69185, -0.395071, 0)
-
-[node name="Car3" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
-transform = Transform3D(0.599736, 0.741936, 0.299746, -0.800198, 0.55607, 0.224655, -1.49012e-08, -0.37459, 0.92719, 1.00298, -1.41184, 0.303514)
+transform = Transform3D(0.981527, 0.191323, 0, -0.191323, 0.981527, 0, 0, 0, 1, 1.65909, -0.323061, 0)
 
 [node name="Car4" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
-transform = Transform3D(-0.798468, 0.428211, 0.423185, -0.60071, -0.613346, -0.512792, 0.0399761, -0.663659, 0.746967, -1.53768, -0.781998, -0.295347)
+transform = Transform3D(-0.727618, 0.535596, 0.428614, -0.68459, -0.52714, -0.503449, -0.0437053, -0.659743, 0.75022, -1.27423, -1.11907, -0.292359)
 
 [node name="Car5" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
 transform = Transform3D(-0.843964, 0.418127, -0.335998, -0.536049, -0.680088, 0.500131, -0.0193896, 0.602204, 0.798107, -1.55861, -0.769011, 0.281817)
@@ -299,17 +305,29 @@ transform = Transform3D(0.891315, 0.453062, -0.017099, 0.45255, -0.891329, -0.02
 [node name="Barrier2" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("6_ioaeq")]
 transform = Transform3D(0.404286, -0.914076, -0.0319032, 0.914114, 0.404986, -0.0195708, 0.0308095, -0.0212509, 0.9993, 0.555301, 1.60376, 0.370122)
 
+[node name="Barrier3" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("6_ioaeq")]
+transform = Transform3D(-0.936078, -0.350345, -0.0319032, 0.35104, -0.936156, -0.0195708, -0.0230099, -0.0295191, 0.9993, -1.58944, 0.643345, 0.0123365)
+
+[node name="Barrier4" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("6_ioaeq")]
+transform = Transform3D(-0.810659, -0.58465, -0.0319032, 0.585342, -0.81055, -0.0195708, -0.0144171, -0.0345395, 0.9993, -1.39584, 0.995441, -0.327037)
+
+[node name="Barrier5" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("6_ioaeq")]
+transform = Transform3D(-0.98786, 0.152041, -0.0319032, -0.151472, -0.988268, -0.0195708, -0.0345045, -0.0145007, 0.9993, -1.70465, -0.178689, -0.359891)
+
 [node name="TrashCan" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
 transform = Transform3D(-0.0394252, -0.0898158, 0.0194623, -0.0918845, 0.0381328, -0.0101548, 0.00169906, -0.0218864, -0.0975607, -0.806203, -1.5101, -0.1834)
 
 [node name="TrashCan2" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
-transform = Transform3D(0.0709347, -0.0661477, -0.0243464, -0.0688991, -0.0577823, -0.0437506, 0.0148721, 0.0478089, -0.0865629, 1.25725, -1.18496, 0.189406)
+transform = Transform3D(0.0709347, -0.018124, 0.068116, -0.0688991, -0.0382187, 0.0615812, 0.0148721, -0.0906138, -0.0395975, 1.31213, -1.04531, 0.57461)
 
 [node name="TrashCan3" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
 transform = Transform3D(-0.0685876, -0.0727267, 0.00256346, 0.0725788, -0.0681068, 0.00968431, -0.00529717, 0.00850274, 0.099497, -1.08093, 1.3771, 0.367427)
 
 [node name="TrashCan4" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
 transform = Transform3D(-0.0605466, 0.00126531, -0.0795771, 0.0793891, -0.00608861, -0.0605004, -0.00561069, -0.0998065, 0.00268196, -0.871422, 1.51636, 0.282209)
+
+[node name="TrashCan5" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("7_7ewk0")]
+transform = Transform3D(0.0712576, -0.0489899, 0.0502229, 0.0701046, 0.052548, -0.0482085, -0.00277375, 0.0695608, 0.0717886, 1.25216, 1.19359, 0.339582)
 
 [node name="Area3D" type="Area3D" parent="SubViewportContainer/SubViewport/Floor"]
 disable_mode = 1

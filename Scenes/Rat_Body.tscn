@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ysmmgxy5276e"]
 
-[ext_resource type="PackedScene" uid="uid://08elm605pkln" path="res://Meshes/Rat_Body.glb" id="1_ffrhi"]
+[ext_resource type="PackedScene" uid="uid://dolouyqox6f5k" path="res://Meshes/Rat_Body.glb" id="1_ffrhi"]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ffrhi"]
 

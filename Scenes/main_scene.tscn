@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=34 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://riojkvpxy7dt" path="res://Scripts/player_controller.gd" id="1_6ev3c"]
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dosd3tpfamerp" path="res://Scripts/end_game_window.gd" id="9_m1efj"]
 [ext_resource type="Script" uid="uid://6vwj5fxn63ew" path="res://Scripts/player_life.gd" id="9_mai8y"]
 [ext_resource type="FontFile" uid="uid://c2ywq3qs7jx6p" path="res://Fonts/Pixellari.ttf" id="12_lhp3t"]
+[ext_resource type="Texture2D" uid="uid://cd2t4ma48huhg" path="res://Sprites/clock.png" id="14_psl12"]
 [ext_resource type="Texture2D" uid="uid://e13mih8xlwgq" path="res://Sprites/full_hp.png" id="15_gnsmo"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jv6wh"]
@@ -121,8 +122,8 @@ size = Vector3(2, 1, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_iacmt"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mai8y"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ebs2"]
+texture = ExtResource("14_psl12")
 
 [sub_resource type="Gradient" id="Gradient_76v2p"]
 interpolation_mode = 1
@@ -219,10 +220,11 @@ _data = {
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera", "world")]
 motion_mode = 1
 script = ExtResource("1_6ev3c")
 camera = NodePath("../Camera3D")
+world = NodePath("../Floor/Cylinder")
 
 [node name="Rat" parent="Player" instance=ExtResource("2_76v2p")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 16.0965, 0)
@@ -321,7 +323,6 @@ shape = SubResource("BoxShape3D_x6ack")
 script = ExtResource("4_x6ack")
 positions = [NodePath("PositionToSpawn1/CollisionShape3D"), NodePath("PositionToSpawn2/CollisionShape3D"), NodePath("PositionToSpawn3/CollisionShape3D")]
 cylinder = NodePath("../Floor/Cylinder")
-chance_for_pickup = 100
 chance_for_walls = 0
 
 [node name="PositionToSpawn1" type="Area3D" parent="Spawner"]
@@ -403,9 +404,17 @@ alignment_vertical = 0
 [node name="Clock" type="Panel" parent="UserInterface/ClockHandler/AspectRatioContainer"]
 layout_mode = 2
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_mai8y")
+theme_override_styles/panel = SubResource("StyleBoxTexture_2ebs2")
+
+[node name="ColorRect" type="ColorRect" parent="UserInterface/ClockHandler/AspectRatioContainer/Clock"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="UserInterface/ClockHandler/AspectRatioContainer/Clock"]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -479,6 +488,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -30.0
+offset_right = 23.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3

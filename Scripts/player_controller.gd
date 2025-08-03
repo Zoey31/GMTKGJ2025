@@ -14,6 +14,7 @@ class_name PlayerController
 var life = 3
 var vel: Vector3 = Vector3(0, 0, 0)
 var distance_counter = 0
+var is_dead = false
 
 
 signal pickup_item(pickup: PickupStats)
@@ -59,11 +60,15 @@ func handle_collision(area: Area3D):
 			$AnimationPlayer.animation_finished.connect(
 				display_score_screen
 			)
+			is_dead = true
 		else:
 			$AnimationPlayer.play("hit")
 			hit.emit()
 
 func _process(delta):
+	if is_dead:
+		velocity = Vector3(0, 0, 0)
+		return
 	if Input.is_action_pressed("left"):
 		vel.z = max(vel.z - acceleration, -speed)
 	elif Input.is_action_pressed("right"):

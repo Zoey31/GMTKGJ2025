@@ -225,6 +225,7 @@ motion_mode = 1
 script = ExtResource("1_6ev3c")
 camera = NodePath("../Camera3D")
 world = NodePath("../Floor/Cylinder")
+speed = 15.0
 
 [node name="Rat" parent="Player" instance=ExtResource("2_76v2p")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 16.0965, 0)

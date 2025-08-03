@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdyhx00y702aa"]
+
+[ext_resource type="PackedScene" uid="uid://yukvj06aajcx" path="res://Meshes/Car.glb" id="1_vdgew"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kifhq"]
+albedo_color = Color(0.239216, 0.231373, 0.905882, 1)
+
+[node name="Car2" instance=ExtResource("1_vdgew")]
+
+[node name="Car" parent="." index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_kifhq")

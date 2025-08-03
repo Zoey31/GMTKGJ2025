@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ojhmrwyohm2l"]
+[gd_scene load_steps=41 format=3 uid="uid://ojhmrwyohm2l"]
 
 [ext_resource type="Script" uid="uid://riojkvpxy7dt" path="res://Scripts/player_controller.gd" id="1_6ev3c"]
 [ext_resource type="Script" uid="uid://snv74ahjfic4" path="res://Scripts/auto_rotation_world_cylinder.gd" id="1_6l7je"]
@@ -19,6 +19,8 @@
 [ext_resource type="FontFile" uid="uid://c2ywq3qs7jx6p" path="res://Fonts/Pixellari.ttf" id="12_lhp3t"]
 [ext_resource type="Texture2D" uid="uid://cd2t4ma48huhg" path="res://Sprites/clock.png" id="14_psl12"]
 [ext_resource type="Texture2D" uid="uid://e13mih8xlwgq" path="res://Sprites/full_hp.png" id="15_gnsmo"]
+[ext_resource type="Texture2D" uid="uid://cb7ek6q0ugevl" path="res://Sprites/BG1.png" id="20_jvnna"]
+[ext_resource type="Texture2D" uid="uid://cyfjtl86hrl0j" path="res://Sprites/BG2.png" id="21_b48ew"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jv6wh"]
 
@@ -220,6 +222,14 @@ _data = {
 &"panic": SubResource("Animation_m1efj")
 }
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_oyb3p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b48ew"]
+albedo_texture = ExtResource("20_jvnna")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8edxt"]
+albedo_texture = ExtResource("21_b48ew")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -294,10 +304,10 @@ transform = Transform3D(-0.0399873, -0.686501, 0.726028, -0.998433, -0.00101645,
 transform = Transform3D(0.981527, 0.191323, 0, -0.191323, 0.981527, 0, 0, 0, 1, 1.65909, -0.323061, 0)
 
 [node name="Car4" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
-transform = Transform3D(-0.727618, 0.535596, 0.428614, -0.68459, -0.52714, -0.503449, -0.0437053, -0.659743, 0.75022, -1.27423, -1.11907, -0.292359)
+transform = Transform3D(-0.759069, 0.490005, 0.428614, -0.651003, -0.568098, -0.503449, -0.00319736, -0.661181, 0.75022, -1.26905, -1.11476, -0.292418)
 
 [node name="Car5" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("5_drdnd")]
-transform = Transform3D(-0.843964, 0.418127, -0.335998, -0.536049, -0.680088, 0.500131, -0.0193896, 0.602204, 0.798107, -1.55861, -0.769011, 0.281817)
+transform = Transform3D(-0.942365, 0.282977, -0.178527, -0.325218, -0.649314, 0.687477, 0.0786204, 0.705914, 0.703921, -1.53396, -0.746176, 0.285017)
 
 [node name="Barrier" parent="SubViewportContainer/SubViewport/Floor/Cylinder/Obstacles" instance=ExtResource("6_ioaeq")]
 transform = Transform3D(0.891315, 0.453062, -0.017099, 0.45255, -0.891329, -0.0270494, -0.0274959, 0.0163713, -0.999488, 1.50715, 0.826526, -0.292738)
@@ -660,3 +670,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-6.99382e-06, -98.5877, -15.0727, 5.68434e-14, 16.7474, -88.7289, 160, -4.3094e-06, -6.58848e-07, 80.0251, 5.55271, 1.76387e-06)
+mesh = SubResource("PlaneMesh_oyb3p")
+surface_material_override/0 = SubResource("StandardMaterial3D_b48ew")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-157.74, 7.82482e-06, -15.0727, 26.7959, -2.62906e-06, -88.7289, -1.38889e-05, -100, 2.87992e-14, -76.3537, 29.739, 154.851)
+mesh = SubResource("PlaneMesh_oyb3p")
+surface_material_override/0 = SubResource("StandardMaterial3D_8edxt")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(157.74, -1.68729e-05, -15.0727, -26.7959, 1.56642e-06, -88.7289, 2.78765e-05, 100, 8.48877e-14, -80.4734, 32.8171, -150.296)
+mesh = SubResource("PlaneMesh_oyb3p")
+surface_material_override/0 = SubResource("StandardMaterial3D_8edxt")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.46354e-05, 16.7474, -88.7289, -1.05345e-06, 98.5877, 15.0727, 160, 4.23751e-06, -1.5261e-05, -19.7364, -67.8315, 1.13335)
+mesh = SubResource("PlaneMesh_oyb3p")
+surface_material_override/0 = SubResource("StandardMaterial3D_8edxt")

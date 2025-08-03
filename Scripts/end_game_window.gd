@@ -5,7 +5,7 @@ var score = 0
 
 func _ready():
 	if player:
-		player.hit_and_die.connect(showWindow)
+		player.score_screen.connect(showWindow)
 		player.pickup_item.connect(add_score)
 	var restart_button = $HBoxContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer/Restart
 	restart_button.connect("button_down", restartGame)

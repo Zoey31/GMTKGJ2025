@@ -11,10 +11,14 @@ var life = 3
 
 signal pickup_item(pickup: PickupStats)
 signal hit_and_die()
+signal score_screen()
 signal hit()
 
 func _ready():
 	$Area3D.connect("area_entered", handle_collision)
+
+func display_score_screen(_ignore):
+	score_screen.emit()
 
 func handle_collision(area: Area3D):
 	var hit_element = area.get_parent()
@@ -25,11 +29,14 @@ func handle_collision(area: Area3D):
 		
 	if hit_element.is_in_group("collider"):
 		life -= 1
-		$AnimationPlayer.play("hit", -1, 2.0)
 		if life < 1:
-			visible = false
+			$AnimationPlayer.play("die")
 			hit_and_die.emit()
+			$AnimationPlayer.animation_finished.connect(
+				display_score_screen
+			)
 		else:
+			$AnimationPlayer.play("hit")
 			hit.emit()
 
 func _process(delta):

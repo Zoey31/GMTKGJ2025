@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dq2yw0hv8wc2h"]
 
 [ext_resource type="Script" uid="uid://csmxydysqnk30" path="res://Scripts/pickup_stats.gd" id="1_16if3"]
-[ext_resource type="Script" path="res://Scripts/pickup_idle.gd" id="2_4amd7"]
+[ext_resource type="Script" uid="uid://cc5kenj6kfrmo" path="res://Scripts/pickup_idle.gd" id="2_4amd7"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0si41"]
 bottom_radius = 0.0

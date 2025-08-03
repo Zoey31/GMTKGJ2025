@@ -8,12 +8,14 @@ extends Camera3D
 var newPosition: float
 
 func _ready() -> void:
-	newPosition = position.y
+	newPosition = 1
 	if cylinder:
 		cylinder.rotation_done.connect(move_camera_on_rotate)
 
 func _process(delta):
-	position.y = clampf(position.y + delta * speed, position.y, newPosition)
+	#position.y = clampf(position.y + delta * speed, position.y, newPosition)
+	var arm: SpringArm3D = $".."
+	arm.spring_length = clampf(arm.spring_length + delta * speed, arm.spring_length, newPosition)
 
 func move_camera_on_rotate():
 	newPosition += camera_distance_per_rotate

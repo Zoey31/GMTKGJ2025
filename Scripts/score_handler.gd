@@ -15,6 +15,9 @@ func add_to_score(pickup: PickupStats):
 	score += pickup.points
 	$RichTextLabel.text = str(score)
 	
+	if not pickup.effect:
+		return
+	
 	var text = fadeOutText.instantiate()
 	add_child(text)
 	text.start(pickup.points)

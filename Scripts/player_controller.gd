@@ -31,12 +31,14 @@ func add_score_per_distance(_cur):
 	if _cur >= distance_counter + extra_points_per:
 		distance_counter = _cur
 		var pickup = PickupStats.new()
+		pickup.effect = false
 		pickup.points = extra_point
 		pickup_item.emit(pickup)
 		
 func add_score_per_finish():
 	distance_counter = 0
 	var pickup = PickupStats.new()
+	pickup.effect = false
 	pickup.points = extra_point
 	pickup_item.emit(pickup)
 

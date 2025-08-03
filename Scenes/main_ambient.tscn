@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmy8go6npaxr6"]
+
+[ext_resource type="AudioStream" uid="uid://chg67assx3gn1" path="res://Sounds/Ambient_422837__gamedevc__g_tick_tock_loop_1.wav" id="1_k7qem"]
+
+[node name="BbcAtmosphere0009004" type="AudioStreamPlayer"]
+stream = ExtResource("1_k7qem")
+autoplay = true
+bus = &"Ambient"

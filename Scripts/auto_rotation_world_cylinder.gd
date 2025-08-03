@@ -1,6 +1,9 @@
 extends Node3D
 class_name AutoRotationWorldCylinder
 
+var hurry_up_sound = preload("res://Sounds/Hurry-up_149097__setuniman__in-a-hurry-q38o2m.wav")
+
+
 @export_category("Variables")
 @export var speed: float = 15
 @export var tick_interval: float = 5
@@ -44,6 +47,7 @@ func _physics_process(delta: float) -> void:
 		rotation_count += 1
 		current_rotation_value -= 360
 		speed += speed_increase
+		$"../AudioStreamPlayer3D".play()
 		rotation_done.emit()
 
 	rotation_handle.emit(current_rotation_value)

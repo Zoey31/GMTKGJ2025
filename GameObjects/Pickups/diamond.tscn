@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dq2yw0hv8wc2h"]
+[gd_scene load_steps=13 format=3 uid="uid://dq2yw0hv8wc2h"]
 
 [ext_resource type="Script" uid="uid://csmxydysqnk30" path="res://Scripts/pickup_stats.gd" id="1_16if3"]
-[ext_resource type="Script" uid="uid://cc5kenj6kfrmo" path="res://Scripts/pickup_idle.gd" id="2_4amd7"]
+[ext_resource type="Script" path="res://Scripts/pickup_idle.gd" id="2_4amd7"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0si41"]
 bottom_radius = 0.0
@@ -81,6 +81,12 @@ _data = {
 &"idle": SubResource("Animation_16if3")
 }
 
+[sub_resource type="SphereMesh" id="SphereMesh_4amd7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64xsj"]
+transparency = 1
+albedo_color = Color(0.407843, 1, 1, 0.0392157)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_0si41"]
 
 [node name="Diamond" type="Node3D" groups=["pickup"]]
@@ -105,6 +111,12 @@ material = SubResource("StandardMaterial3D_3f4sk")
 libraries = {
 &"": SubResource("AnimationLibrary_3f4sk")
 }
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-5.42999e-06, 0, -1.5, 0, 1.5, 0, 1.5, 0, -5.42999e-06, 0.000242217, -0.000487953, 0.000183226)
+mesh = SubResource("SphereMesh_4amd7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_64xsj")
 
 [node name="Area3D" type="Area3D" parent="."]
 
